@@ -1,0 +1,361 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 24, 2025 at 11:23 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `course_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `number` varchar(15) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `appointment_date` date NOT NULL,
+  `appointment_time` enum('09:00 - 10:00','10:00 - 11:00','11:00 - 12:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00') NOT NULL,
+  `communication_medium` enum('Zoom Call','WhatsApp Call') NOT NULL,
+  `status` enum('pending','confirmed','canceled') DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `name`, `number`, `email`, `appointment_date`, `appointment_time`, `communication_medium`, `status`) VALUES
+(6, 'bisma', '03156274598', 'bisma@gmail.com', '2025-01-24', '09:00 - 10:00', 'Zoom Call', 'canceled'),
+(7, 'areesha', '03561249812', 'areesha@gmail.com', '2025-01-24', '10:00 - 11:00', 'WhatsApp Call', 'canceled');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookmark`
+--
+
+CREATE TABLE `bookmark` (
+  `user_id` varchar(20) NOT NULL,
+  `playlist_id` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookmark`
+--
+
+INSERT INTO `bookmark` (`user_id`, `playlist_id`) VALUES
+('7', 'l8NWSaNv3etvxSwFEOLw');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` varchar(20) NOT NULL,
+  `content_id` varchar(20) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `tutor_id` varchar(20) NOT NULL,
+  `comment` varchar(1000) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `content_id`, `user_id`, `tutor_id`, `comment`, `date`) VALUES
+('AjSK8Wan2IuLpHJAh9Mt', 'TJMxnaRG9DDduE8K18V1', '4', '0VaKvADOCGJoTN1sGB4B', 'really appreciate your efforts\r\n', '2024-08-06'),
+('bmnYQ4HjP000KgcEa2j2', 'lAr8zU25yMm3qWndRW4E', '5', '0VaKvADOCGJoTN1sGB4B', 'good', '2024-08-07'),
+('FeOskxxyoYJfOFwTcz1F', 'xmI2ptYpBRHVLnyyN9n2', '6', '0VaKvADOCGJoTN1sGB4B', 'really good', '2024-08-07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `number` int(10) NOT NULL,
+  `message` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`name`, `email`, `number`, `message`) VALUES
+('', '', 2147483647, 'hi'),
+('', '', 2147483647, 'hry'),
+('', '', 2135897461, 'good'),
+('', '', 2147483647, 'heyyyyyyyyyyy'),
+('zain', 'zain@gmail.com', 0, 'heyyyyyyy'),
+('zain', 'zain@gmail.com', 0, 'very good\r\n'),
+('zain', 'zain@gmail.com', 0, 'very very goood'),
+('aqsa', 'aqsa@gmail.com', 0, 'wonderful');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `content`
+--
+
+CREATE TABLE `content` (
+  `id` varchar(20) NOT NULL,
+  `tutor_id` varchar(20) NOT NULL,
+  `playlist_id` varchar(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `video` varchar(100) NOT NULL,
+  `thumb` varchar(100) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(20) NOT NULL DEFAULT 'deactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `content`
+--
+
+INSERT INTO `content` (`id`, `tutor_id`, `playlist_id`, `title`, `description`, `video`, `thumb`, `date`, `status`) VALUES
+('xmI2ptYpBRHVLnyyN9n2', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', 'How to not stutter when you are nervous', 'Practice slow, deliberate speech and deep breathing techniques to stay calm and maintain fluency when nervous.', 'NYI32NCb9L0TuQY8Izj4.mp4', 'WWmDUcAhs48HppZV1hFd.png', '2024-08-06', 'active'),
+('UINuyBVahUibO8yqG9lP', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', 'What is a speech sound disorder?', 'A speech sound disorder is a condition where an individual has difficulty pronouncing sounds correctly, impacting their ability to communicate effectively.', 'pbVbfWAySPYab2RmG7H2.mp4', 'DNO7JM2jc7zo1ZFrBnWn.png', '2024-08-06', 'active'),
+('TJMxnaRG9DDduE8K18V1', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', 'What to expect in speech therapy for stuttering', 'Speech therapy for stuttering involves personalized techniques to improve speech fluency, including controlled breathing exercises, slow speech practice, and cognitive strategies to manage anxiety and build confidence.', 'k8lrLcqZKUcyVtn7vAyS.mp4', '20V9o6DHI49YgU8xQS1Z.png', '2024-08-06', 'active'),
+('F1TR9J4cYtzATaWjrQoM', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', 'What do the 3 types of stuttering sound like', 'The three types of stutteringâ€”repetitions (repeating sounds, syllables, or words), prolongations (lengthening sounds), and blocks (pauses or gaps in speech)â€”create distinct disruptions in fluid speech.', 'kn52I9J4TQuzhi2XVp6L.mp4', 'pinSyK4YkAEDq23N8Oxj.png', '2024-08-06', 'active'),
+('bKeHPBGNsanKTVQJFUaj', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', '  What is a speech delay?', 'A speech delay is a condition where a child develops speech skills at a slower rate than typical for their age.', 'LFBZndbXHOwOkGBoF7et.mp4', 'wXbEWB2NmLCvVHBgT7qO.png', '2024-08-06', 'active'),
+('6ye7CktzbBIjCUzn6Gvl', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', 'How are speech delays treated?', 'Speech delays are treated through tailored speech therapy interventions, including exercises to improve articulation, language skills, and communication strategies.', 'HXoufgWvNTry3f0dXjom.mp4', 'fe66HYOiIP2qAxLumE5H.png', '2024-08-06', 'active'),
+('rV1QfxwybsZDPi3sT0ws', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', 'What is a lisp, and what causes it?', 'A lisp is a speech disorder where a person has difficulty pronouncing sibilant sounds like &#34;s&#34; and &#34;z,&#34; often caused by incorrect tongue placement or dental issues.', 'qO6gwsGrZr6h9E6YGGL6.mp4', 'bTmQJzZe5DBh76PwblX7.png', '2024-08-06', 'active'),
+('pu7414NUCV4DjV1MeQQ9', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', 'The 4 types of lisps and what they sound like', 'There are four types of lisps, each with a distinct sound. An interdental lisp occurs when the tongue protrudes between the teeth, causing &#34;s&#34; or &#34;z&#34; sounds to resemble &#34;th,&#34; as in &#34;thun&#34; for &#34;sun.&#34; A dentalized lisp results from the tongue pressing against the front teeth, producing a muffled &#34;s&#34; or &#34;z&#34; sound, often similar to a softened &#34;d.&#34; In a lateral lisp, air escapes over the sides of the tongue, creating a wet or slushy &#34;s&#34; or &#34;z&#34; sound, like &#34;shun&#34; for &#34;sun.&#34; Finally, a palatal lisp happens when the middle of the tongue touches the soft palate, leading to a &#34;sh&#34; sound for &#34;s,&#34; also exemplified by &#34;shun&#34; for &#34;sun.&#34;', 'M5ORCxwJIqggU9BJifBf.mp4', 'KRnCmkNhVmyI7KSsvLKE.png', '2024-08-07', 'active'),
+('asbzG6rYaH6t5D5CG9iI', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', 'How are lisps diagnosed and treated?', 'Lisps are diagnosed through speech assessments by a speech-language pathologist and are typically treated with speech therapy exercises that focus on correct tongue placement and sound production.', '2XPunZNL94n5vUuNi7pG.mp4', 'zBq8hAgMzw4kitX4esD4.png', '2024-08-07', 'active'),
+('pgPVVey81KGVFtLPBmxD', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', '3 Tips to Improve Your Child&#39;s Speech ', 'A speech therapist reveals that to improve your child&#39;s speech, you should consistently model clear pronunciation, engage in interactive reading to expand vocabulary and comprehension, and encourage play-based learning to make speech practice enjoyable and natural.', 'mvCAbzcleK0VLDVMWNKi.mp4', 'jS2UTGl5PVl50AY54ODa.png', '2024-08-07', 'active'),
+('RnavZDmD59qjsn6LpqhT', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', 'Introduction to Fluency Shaping', 'Introduction to Fluency Shaping involves teaching individuals who stutter to develop and maintain fluent speech through techniques such as slow speech, gentle onset, and continuous phonation, aiming to retrain their speech patterns for smoother communication.', 'RexbVyN5r3JI4xnBkLE7.mp4', '6z1EtYOLEiC0fs7R6BwK.png', '2024-08-07', 'active'),
+('5P0fs4U3bvsIlFCY1tg0', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', 'Identifying and modifying your secondary symptoms', 'Identifying and modifying your secondary symptoms involves recognizing the additional, often less obvious, manifestations of a primary issue, and then implementing strategies or treatments to alleviate or adjust these symptoms for improved overall well-being.', 'KPhpf7kw3SpcSscCpWRp.mp4', 'JtHncUiboqfDwMwqDTfG.png', '2024-08-07', 'active'),
+('lAr8zU25yMm3qWndRW4E', '0VaKvADOCGJoTN1sGB4B', 'IbdjPvHHfwwYPQngyoNW', 'What affects the pace of progress in speech therapy', 'The pace of progress in speech therapy is influenced by factors such as the severity of the speech disorder, the individual&#39;s age, the consistency and frequency of therapy sessions, the quality of the therapeutic techniques used, the individual&#39;s motivation and engagement, support from family and caregivers, and any underlying medical or developmental conditions.', 'ikFt9JbxU39tVElPq6wx.mp4', '82brKPbVaSJJGeQehvrQ.PNG', '2024-08-07', 'active'),
+('UR83eteHghcAWDKt78Vr', '0VaKvADOCGJoTN1sGB4B', 'IbdjPvHHfwwYPQngyoNW', 'How to start a conversation with people you don&#39;t know', 'To start a conversation with people you don&#39;t know, approach with a friendly demeanor, introduce yourself, and use open-ended questions or comments about your shared environment or circumstances to create a natural and engaging dialogue.', 'FXjP2cDVOhcPar0fWf5b.mp4', '4NESRUeddlsuAP0GsVzl.PNG', '2024-08-07', 'active'),
+('Toa5nBXehwyuGbJ37Qwj', '0VaKvADOCGJoTN1sGB4B', 'IbdjPvHHfwwYPQngyoNW', 'The communication milestones that come before speech', 'Before speech development, key communication milestones include cooing, where infants make vowel-like sounds; babbling, characterized by repetitive consonant-vowel combinations like &#34;bababa&#34;; gesturing, where infants use hand movements to express needs and emotions; and understanding, demonstrated by recognizing and responding to familiar words and tones even before they can speak.', 'cENa8ixxAF06M1VzmzLk.mp4', 'shGudczCdsgV3bYI0wxg.PNG', '2024-08-07', 'active'),
+('OpFk5iA3kEFGHC2BHybB', '0VaKvADOCGJoTN1sGB4B', 'IbdjPvHHfwwYPQngyoNW', 'Language Therapy Advance: Specialized SLP Training', 'Language Therapy Advance: Specialized Training for SLPs Treating Language Disorders is a comprehensive program designed to equip speech-language pathologists with advanced techniques and knowledge for effectively diagnosing and treating various language disorders, ensuring they can provide the highest level of care to their patients.', 'AT3PTLqsfTJVUiuKLFx0.mp4', 'mkYO8JA1DLH7eN5l5Yof.PNG', '2024-08-07', 'active'),
+('aMuThweSZ1izMLUq65RX', '0VaKvADOCGJoTN1sGB4B', 'IbdjPvHHfwwYPQngyoNW', 'Five Key Insights for Gaining Control Over Stammering', 'Gaining control over stammering involves five key understandings: recognizing that stammering varies and can be inconsistent, understanding that anxiety and stress can exacerbate it, knowing that slowing down your speech can reduce instances, realizing that practicing relaxation and breathing techniques can help, and acknowledging that seeking support from speech therapists or support groups can be beneficial.', 'Wr3Bzx6IWuTcXm0zmRxE.mp4', 'cjCicoH0UvpISP2pVBaY.PNG', '2024-08-07', 'active'),
+('ewQ84j7VcY9xOsNXZv5W', '0VaKvADOCGJoTN1sGB4B', 'hh7wtkFLag716PgRhw83', 'How to start a conversation with people you don&#39;t know', 'Starting a conversation with strangers involves a friendly introduction and asking open-ended questions to show genuine interest. Using a warm tone and active listening can help build rapport and ease initial interactions.', 'hstsa6lAzMnXvBh328Mf.mp4', 'xML4ktRtDsTm1pX4JhCX.png', '2024-08-21', 'active'),
+('Bsf94Y2rSKuPDixLtb7L', '0VaKvADOCGJoTN1sGB4B', 'hh7wtkFLag716PgRhw83', 'The communication milestones that come before speech', 'Communication milestones that precede speech include the development of non-verbal skills such as eye contact, gestural communication, and understanding of social cues. These foundational skills are crucial as they support the transition from early communication methods to more complex verbal interactions.', 'Gg22QxTqqPmREP3gSiyh.mp4', 'f9FmAm30ZojdORgHIOUo.png', '2024-08-21', 'active'),
+('Ndg7yuoO9E3gYBGDcsm6', '0VaKvADOCGJoTN1sGB4B', 'hh7wtkFLag716PgRhw83', 'Language Therapy Specialized SLP Training', 'Language Therapy Specialized SLP Training provides targeted instruction for speech-language pathologists to enhance their skills in diagnosing and treating complex language disorders. This advanced training equips clinicians with cutting-edge techniques and strategies to improve patient outcomes and address diverse communication challenges.', 'AWT8VD5O75JxxFCBiiaW.mp4', 'Ntct7XGb7fsckEt7S6vl.png', '2024-08-21', 'active'),
+('2C0z2rKTI4d91cSISF5Z', '0VaKvADOCGJoTN1sGB4B', 'hh7wtkFLag716PgRhw83', 'Five Key Insights for Gaining Control Over Stammering', '&#34;Five Key Insights for Gaining Control Over Stammering&#34; provides actionable strategies and understanding to effectively manage and reduce stammering. This guide emphasizes practical techniques, self-awareness, and adaptive practices to enhance speech fluency and confidence.', 'X1B69AfRoCENoAyEeeLZ.mp4', 'AyxxtiITDy4UVJ7TL4tX.png', '2024-08-21', 'active'),
+('ZW7pN1AoCSO7ttZHzXpO', '0VaKvADOCGJoTN1sGB4B', 'hh7wtkFLag716PgRhw83', 'What affects the pace of progress in speech therapy', 'he pace of progress in speech therapy can be influenced by factors such as the individual’s commitment and consistency in practicing techniques, as well as the severity and type of speech disorder being addressed. Additionally, the effectiveness of the therapy plan and the quality of the therapeutic relationship also play crucial roles in determining progress.', 'u8NGO9VlOWiJ154Zx2kX.mp4', 'kFvFyFKyHdbGCadiR84J.png', '2024-09-24', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exercise`
+--
+
+CREATE TABLE `exercise` (
+  `id` varchar(20) NOT NULL,
+  `tutor_id` varchar(20) NOT NULL,
+  `playlist_id` varchar(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `exercises` varchar(100) NOT NULL,
+  `thumb` varchar(100) NOT NULL,
+  `date` date NOT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exercise`
+--
+
+INSERT INTO `exercise` (`id`, `tutor_id`, `playlist_id`, `title`, `description`, `exercises`, `thumb`, `date`, `status`) VALUES
+('01R17UgPWek8iCibuyx7', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', 'Speak More Clearly: 4 Speech Therapy Exercises for Articulation!', 'Improve your speech clarity with these four effective articulation exercises designed to enhance pronunciation and communication skills. Perfect for anyone looking to strengthen their speaking abilities.', '4nvs6QiL9XWWLrtHjIJ5.mp4', 'McoACSYlIcotNh1zRVwa.png', '0000-00-00', 'active'),
+('a0TJO16DJyxLaas6DOQY', '0VaKvADOCGJoTN1sGB4B', 'l8NWSaNv3etvxSwFEOLw', '5 Tongue Exercises For Clear Speech And Articulation', 'Enhance your speech clarity with these five targeted tongue exercises that improve articulation and control. Ideal for refining pronunciation and strengthening your speaking muscles.', 'UqSn1Ap3RZCpAx3pRB7g.mp4', 'ZnZWugrD0Vc6a7hOkPj2.png', '0000-00-00', 'active'),
+('XfnpWP3DulIT0LCsBjVg', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', 'Tone Your Tongue - Intrinsic Lingual Muscle Exercises', 'Strengthen your tongue with targeted intrinsic lingual muscle exercises that enhance articulation and speech clarity. These exercises are ideal for improving tongue control and dexterity.', 't7vPQrC6bnzZ2OSRqx8J.mp4', 'S1LnhnP8qoahOVa2bhVN.png', '0000-00-00', 'active'),
+('PLpYjIJ0xKzuAgFWgbcc', '0VaKvADOCGJoTN1sGB4B', '0m5hchHdDw937OP0r6zI', 'Speak More Clearly: 4 Speech Therapy Exercises for Articulation!', 'Improve your speech clarity with these four effective articulation exercises designed to enhance pronunciation and communication skills. Perfect for anyone looking to strengthen their speaking abilities.', 'PwaRgSbz2zQox5IKZVEL.mp4', 'iD2q2MtkymlBrlqDr4hB.png', '0000-00-00', 'active'),
+('C5Aj3Qenhiz3MrSV9KDp', '0VaKvADOCGJoTN1sGB4B', 'hh7wtkFLag716PgRhw83', '5 Tongue Exercises For Clear Speech And Articulation', 'Enhance your speech clarity with these five targeted tongue exercises that improve articulation and control. Ideal for refining pronunciation and strengthening your speaking muscles.', 'NZYYKLngl6nSnCO550a3.mp4', '8KG3I5QDo9tU1Kcdnw7M.png', '0000-00-00', 'active'),
+('qokYJ8Z4WjHoApC0RSJX', '0VaKvADOCGJoTN1sGB4B', 'hh7wtkFLag716PgRhw83', 'Tone Your Tongue - Intrinsic Lingual Muscle Exercises', 'Strengthen your tongue with targeted intrinsic lingual muscle exercises that enhance articulation and speech clarity. These exercises are ideal for improving tongue control and dexterity.', '17IpUW78eDdv4JayY6al.mp4', 'Z2sDotT5tszn0itbFHHO.png', '0000-00-00', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `user_id` varchar(20) NOT NULL,
+  `tutor_id` varchar(20) NOT NULL,
+  `content_id` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`user_id`, `tutor_id`, `content_id`) VALUES
+('4', '0VaKvADOCGJoTN1sGB4B', 'TJMxnaRG9DDduE8K18V1'),
+('5', '0VaKvADOCGJoTN1sGB4B', 'lAr8zU25yMm3qWndRW4E'),
+('6', '0VaKvADOCGJoTN1sGB4B', 'xmI2ptYpBRHVLnyyN9n2'),
+('7', '0VaKvADOCGJoTN1sGB4B', 'pu7414NUCV4DjV1MeQQ9');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `playlist`
+--
+
+CREATE TABLE `playlist` (
+  `id` varchar(20) NOT NULL,
+  `tutor_id` varchar(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `thumb` varchar(100) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(20) NOT NULL DEFAULT 'deactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `playlist`
+--
+
+INSERT INTO `playlist` (`id`, `tutor_id`, `title`, `description`, `thumb`, `date`, `status`) VALUES
+('l8NWSaNv3etvxSwFEOLw', '0VaKvADOCGJoTN1sGB4B', 'Basic', 'The aim of this therapy plan is to provide a structured and supportive framework for individuals seeking to improve their mental and emotional well-being. This plan includes a combination of therapeutic exercises and instructional videos to guide individuals through various techniques and practices that promote mental health and resilience.', 'MFdgufvaHCuEGENPDROe.jpeg', '2024-08-21', 'active'),
+('0m5hchHdDw937OP0r6zI', '0VaKvADOCGJoTN1sGB4B', 'Intermediate', 'The intermediate therapy plan offers a more in-depth approach with targeted exercises and videos to address specific issues such as advanced cognitive skills, emotional regulation, and behavior management. It includes progressive activities and instructional videos designed to build on foundational skills and enhance overall well-being.', 'HhibO8WRqdt4BUUimj8z.jpeg', '2024-08-21', 'active'),
+('hh7wtkFLag716PgRhw83', '0VaKvADOCGJoTN1sGB4B', 'Advanced', 'The Advanced Stammering Therapy Plan is a comprehensive program designed to help individuals manage and overcome stammering through techniques and cognitive-behavioral strategies. Tailored to each individual&#39;s needs, this plan focuses on building confidence, improving speech fluency, and enhancing communication skills.', 'AoDCycJU2LQpN5B1Kc9H.jpeg', '2024-08-21', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `therapists`
+--
+
+CREATE TABLE `therapists` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `therapists`
+--
+
+INSERT INTO `therapists` (`id`, `username`, `password`) VALUES
+(1, 'therapist', 'Therapist123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tutors`
+--
+
+CREATE TABLE `tutors` (
+  `id` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `profession` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `image` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tutors`
+--
+
+INSERT INTO `tutors` (`id`, `name`, `profession`, `email`, `password`, `image`) VALUES
+('0VaKvADOCGJoTN1sGB4B', 'Maria', 'female', 'maria@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'dBZSJbuT61yNZivf6urC.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `image` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `image`) VALUES
+(3, 'samreena', 'sam@gmail.com', 'ca930c5aa38f954ecfc5e64be8c1274fea518e12', '48mmZ6BE7Uoti7II0Hh3.jpg'),
+(4, 'ayesha', 'ayesha@gmail.com', '268898dece5052735352eb754d75d2e45eb73c57', 'PTf54K4qkhOPHxOzPexX.jpg'),
+(5, 'nimra rao', 'nimra@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', 'XEAQe0ufJVrmremL60UK.jpg'),
+(6, 'anusha noor', 'mm@gmail.com', 'b8d09b4d8580aacbd9efc4540a9b88d2feb9d7e5', 'Sbbhkr7sdx5SD5DLnlmV.jpg'),
+(7, 'maria', 'maria@gmail.com', '04cc699761e1c837eb54740313345af4d29ad92f', 'qTaVKlPOXnserE1F0LCo.'),
+(11, 'zain', 'zain@gmail.com', '9da2f5b6f8abb65572652064909176390ac55fee', 'silhouette.jpg'),
+(47, 'anusha', 'anusha@gmail.com', '6c9704977b2426d5543ebad6d9f9205a7e337ad5', 'silhouette.jpg'),
+(48, 'aqsa', 'aqsa@gmail.com', '1b61885d47e51b139c4c4ed79400a7cec01d7a9d', 'silhouette.jpg'),
+(49, 'aqsa1', 'aqsa1@gmail.com', '1b61885d47e51b139c4c4ed79400a7cec01d7a9d', 'silhouette.jpg'),
+(50, 'ayesha', 'ayesha1@gmail.com', '59d9d348e39153d4c6ff1625e3f24ba4388a4b31', 'silhouette.jpg'),
+(51, 'tooba', 'tooba@gmail.com', '9f97f708c97139eab91a9d0d206ca7ae8ca33bcc', 'silhouette.jpg'),
+(52, 'Omaima', 'omaima@gmail.com', 'ba1835b9e868b8fdd39be29f67f70fb35ff9e104', 'silhouette.jpg');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `appointment_date` (`appointment_date`,`appointment_time`);
+
+--
+-- Indexes for table `therapists`
+--
+ALTER TABLE `therapists`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `therapists`
+--
+ALTER TABLE `therapists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
+
+ALTER TABLE `appointments` ADD `cancellation_reason` VARCHAR(255) AFTER status;
+
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
